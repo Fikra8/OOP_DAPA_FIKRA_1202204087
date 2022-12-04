@@ -2,7 +2,7 @@ public class Laptop extends Perangkat {
     protected boolean webcam;
 
     public Laptop(String drive, int ram, double processor, boolean webcam) {
-        super(drive, ram, processor, webcam);
+        super(drive, ram, processor);
     }
 
     @Override
