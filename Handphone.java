@@ -2,7 +2,7 @@ public class Handphone extends Perangkat {
     protected boolean fingerprint;
     
     public Handphone (String drive, int ram, double processor, boolean fingerprint) {
-        super(drive, ram, processor, fingerprint);
+        super(drive, ram, processor);
     }
 
     public void informasi() {
