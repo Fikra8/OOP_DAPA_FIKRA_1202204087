@@ -1,34 +1,36 @@
 public class MainApp {
-    public static void main(String[] args) {        
+    public static void main(String[] args) {
 
-        Perangkat perangkat = new Perangkat(null, 0, 0);
+        TransportasiAir TrpsAir  = new TransportasiAir(0, 0);
+        TrpsAir.jumlahKursi = 4;
+        TrpsAir.biaya = 20000;
 
-        Handphone hp = new Handphone(null, 0, 0, true);
-        hp.drive = "Samsung";
-        hp.ram = 4;
-        hp.processor = 4.0;
-        hp.fingerprint = true;
+        Sampan s1 = new Sampan(0, 0, 0);
+        s1.jumlahKursi = 20;
+        s1.biaya = 50000;
+        s1.layar = 5;
 
-        Laptop Lp = new Laptop(null, 0, 0, false);
-        Lp.drive = "Seagate";
-        Lp.ram = 32;
-        Lp.processor = 5.0;
-        Lp.webcam = false;
+        Kapal k1 = new Kapal(0, 0, null);
+        k1.jumlahKursi = 50;
+        k1.biaya = 100000;
+        k1.mesin = "Diesel";
 
-        perangkat.informasi();
-
-        System.out.println();
-
-        Lp.informasi();
-        Lp.bukaGame("WAR THUNDER");
-        Lp.KirimEmail("mfikra@gmail.com");
-        Lp.KirimEmail("cekemail123@gmail.com", "nerimaemail123@gmail.com");
+        TrpsAir.informasi();
+        TrpsAir.berlayar();
+        TrpsAir.berlabuh();
 
         System.out.println();
 
-        hp.informasi();
-        hp.telfon(62123456);
-        hp.KirimSMS(62654321);
-        hp.KirimSMS(62123456, 62654321);
+        s1.informasi();
+        s1.berlayar();
+        s1.berlabuh();
+        s1.berlabuh(2);
+
+        System.out.println();
+        k1.informasi();
+        k1.berlayar();
+        k1.berlayar(40);
+        k1.berlabuh();
     }
-}
+} 
+
