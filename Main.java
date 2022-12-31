@@ -4,34 +4,73 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
-        GacoanMaker machine = new GacoanMaker();
-        int customerID, orderQty = 0;
+  public static void main(String[] args) {
+    boolean repeat = true;
+    Scanner scanner = new Scanner(System.in);
+    Calculation calculation = new Calculation();
 
-        System.out.println("Enter Customer ID: ");
-        customerID = input.nextInt();
+    do {
+      try {
+        System.out.println("\n==Menu Program==");
+        System.out.println("1. Square");
+        System.out.println("2. Circle");
+        System.out.println("3. Trapezoid");
+        System.out.println("0. Exit");
+        System.out.print("Select menu: ");
+        int pilihan = scanner.nextInt();
+        Thread.sleep(500);
 
-        try {
-            System.out.println("Enter how much gacoan you want: ");
-            orderQty = input.nextInt();
-        } catch (InputMismatchException e) {
-            System.out.println("Please enter only integer");
-            System.exit(0);
+        switch (pilihan) {
+          case 1:
+            System.out.print("\nEnter the length of the side of the square : ");
+            double sisi = scanner.nextDouble();
+            calculation.side = sisi;
+            calculation.setSquare(sisi);
+            calculation.run();
+            System.out.println("\nThe result is: " + calculation.getSquare());
+            break;
+
+          case 2:
+            System.out.print("\nEnter the radius of the circle : ");
+            double newradius = scanner.nextDouble();
+            calculation.radius = newradius;
+            calculation.setCircle(newradius);
+            calculation.run();
+            System.out.println("\nThe result is: " + calculation.getCircle());
+            break;
+
+          case 3:
+            System.out.print("\nEnter the upper side of the trapezoid : ");
+            double a = scanner.nextDouble();
+            System.out.print("Insert the side of the base of the trapezoid : ");
+            double b = scanner.nextDouble();
+            System.out.print("Enter the height of the trapezoid : ");
+            double t = scanner.nextDouble();
+            calculation.setTrapezoid(a, b, t);
+            calculation.run();
+            System.out.println("\nThe result is: " + calculation.getTrapezoid());
+            break;
+
+          case 0:
+            System.out.println("\nProgram End");
+            break;
+          default:
+            System.out.println("\nOption is not available");
+            continue;
         }
+        repeat = false;
 
-        Thread t1 = new Thread(machine);
-        Waiter waiter = new Waiter(customerID, orderQty);
-        Thread t2 = new Thread(waiter);
+      } catch (InputMismatchException e) {
+        System.out.println("\nError: Input must be a number");
+        scanner.next();
+      } catch (IllegalArgumentException e) {
+        System.out.println(e.getMessage());
+      } catch (InterruptedException e) {
+        System.out.println("\nError: Thread interrupted");
+      }
 
-        t1.start();
-        t2.start();
-        try {
-            t1.join();
-            t2.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
+    } while (repeat);
+
+    scanner.close();
+  }
 }
-
